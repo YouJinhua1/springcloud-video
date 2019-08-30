@@ -1,0 +1,28 @@
+server:
+  port: 8763 
+  
+spring: 
+  application: 
+    name: MovieClientWithoutEureka
+    
+eureka:  
+  client: 
+    healthcheck: 
+      enabled: true
+    service-url: 
+      defaultZone: http://user:123@localhost:8760/eureka
+  instance: 
+    prefer-ip-address: true
+
+#禁用eureka   
+ribbon: 
+  eureka: 
+    enabled: false
+
+#在没有eureka的时候直接使用指定的某个节点的微服务    
+eureka-user-client:
+  ribbon: 
+   listOfServers: localhost:8765
+
+
+      

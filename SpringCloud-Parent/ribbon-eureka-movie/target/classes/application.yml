@@ -1,0 +1,22 @@
+server:
+  port: 8762 
+  
+spring: 
+  application: 
+    name: eureka-movie-client
+    
+eureka:  
+  client: 
+    healthcheck: 
+      enabled: true
+    service-url: 
+      defaultZone: http://user:123@localhost:8760/eureka
+  instance: 
+    prefer-ip-address: true
+
+#使用配置文件的方式来配置负载均衡的算法
+#格式为：需要做负载均衡的微服务的虚拟IP.ribbon.NFLoadBalancerRuleClassName=具体的算法    
+eureka-user-client: 
+  ribbon: 
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+      

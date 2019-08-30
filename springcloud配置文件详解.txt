@@ -1,0 +1,70 @@
+#开启SpringSecurity的安全认证
+security.basic.enabled=true
+
+#设置springSecurity的用户名和密码
+security.user.name=zhangsan
+security.user.password=password123
+
+#设置服务的端口号
+server.port=8761
+
+#设置应用的名称（也是服务注册页面application的名称）
+spring.application.name=eureka_client
+
+#指定该节点的主机名是什么（即可以用：http://user:8080/XXX去访问）
+eureka.instance.hostname=user
+
+#也是修改application的名称的（但是优先级没有：spring.application.name 高）
+eureka.instance.appname=user-service
+
+#没开安全认证的写法
+eureka.client.serviceUrl.defaultZone=http://localhost:8760/eureka
+
+#开启安全认证后的写法
+eureka.client.service-url.defaultZone=http://zhangsan:password123@localhost:8760/eureka
+
+
+#设置服务注册页面Status的显示为IP地址（鼠标移上去显示，再左下角显示）通过ip访问
+eureka.instance.prefer-ip-address=true  #(默认值是为：false)
+
+#设置服务注册页面Status的格式：以下配置格式为---spring.application.name+server.port（eureka_client:8761）
+eureka.instance.instance-id=${spring.application.name}:${server.port}
+
+#使用配置文件的方式来配置ribbon的负载均衡的算法
+#格式为：需要做负载均衡的微服务的虚拟IP.ribbon.NFLoadBalancerRuleClassName=具体的算法    
+#eureka-user-client:要做负载均衡的微服务的虚拟ip（即：spring.application.name的值）
+#等号后面的值：具体的负载均衡算法的带包全名
+eureka-user-client.ribbon.NFLoadBalancerRuleClassName=com.netflix.loadbalancer.RandomRule
+
+#此客户端是否从eureka服务器拉取注册表的信息
+eureka.client.fetch-registry=ture
+
+#是否向注册列表注册自己
+eureka.client.register-with-eureka=false
+
+#配置eureka的首页是否显示(此处显示)
+eureka.client.dashboard.enable=ture 
+
+#配置eureka的首页访问地址（此处配成了：http://localhost:8080/x）
+eureka.client.dashboard.path=/x
+
+#配置eureka首页System Status下的Environment和Data center的名称
+eureka.datacenter=cloud
+eureka.environment=product
+
+#关闭eureka的自我保护模式
+eureka.server.enable-self-preservation=false
+
+
+#解决eureka进入自我保护模式后不自动剔除失效服务
+
+#1.首先在服务端： 
+     eureka.server.enable-self-preservation=false         	 #关闭自我保护，设为false
+     eureka.server.eviction-interval-timer-in-ms=4000		 #清理间隔,默认为（60*1000）单位是毫秒
+  
+#2.其次是客户端:
+     eureka.client.healthcheck.enable=true					 #开启健康检查（需要：spring-boot-start-actuator依赖）
+     eureka.instance.lease-renewal-intervak-in-seconds=10	 #租期更新时间间隔（默认30s）
+     eureka.instance.lease-expriation-duration-in-seconds=30 #租期到期时间(默认90s)
+
+

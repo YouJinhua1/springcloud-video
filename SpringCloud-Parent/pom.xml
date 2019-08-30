@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.yjh</groupId>
+	<artifactId>SpringCloud-Parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<!-- 这是一个父工程 -->
+	<packaging>pom</packaging>
+
+
+	<!-- 添加子工程 -->
+	<modules>
+		<module>ribbon-eureka-server</module>
+		<module>ribbon-eureka-user</module>
+		<module>ribbon-eureka-movie</module>
+		<module>ribbon-movie-without-Eureka</module>
+		<module>feign-server</module>
+		<module>feign-movie</module>
+		<module>feign-user</module>
+		<module>feign-movie-config</module>
+		<module>eureka-high-use</module>
+		<module>hystrix-movie</module>
+		
+	</modules>
+
+	<!-- 指定springboot的父工程 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.4.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<!-- 统一指定版本 -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

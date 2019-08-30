@@ -1,0 +1,23 @@
+server:
+  port: 8762 
+  
+spring: 
+  application: 
+    name: feign-movie-config
+    
+eureka:  
+  client: 
+    healthcheck: 
+      enabled: true
+    service-url: 
+      defaultZone: http://user:123@localhost:8760/eureka
+  instance: 
+    prefer-ip-address: true
+
+#配置feign的日志级别
+logging:
+  level:
+    com.yjh.feign.client.UserFeignClient1: debug
+
+
+      

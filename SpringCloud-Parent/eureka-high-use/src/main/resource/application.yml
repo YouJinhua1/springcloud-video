@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: eureka-high-use
+
+---
+#当使用peer1启动时，将自己注册到peer2和peer3上
+server:
+  port: 8081
+spring: 
+  profiles: peer1
+  
+eureka: 
+  instance: 
+    hostname: peer1
+  client: 
+    serviceUrl: 
+      defaultZone: http://peer2:8082/eureka/,http://peer3:8083/eureka/
+---
+#当使用peer2启动时，将自己注册到peer1上和peer3上
+server:
+  port: 8082
+  
+spring: 
+  profiles: peer2
+  
+eureka: 
+  instance: 
+    hostname: peer2
+  client: 
+    serviceUrl: 
+      defaultZone: http://peer1:8081/eureka/,http://peer3:8083/eureka/
+      
+---
+#当使用peer3启动时，将自己注册到peer1和peer2上
+server:
+  port: 8083
+  
+spring: 
+  profiles: peer3
+  
+eureka: 
+  instance: 
+    hostname: peer3
+  client: 
+    serviceUrl: 
+      defaultZone: http://peer1:8081/eureka/,http://peer2:8082/eureka/
+ 
+      
