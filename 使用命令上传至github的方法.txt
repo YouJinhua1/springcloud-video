@@ -24,3 +24,12 @@
    执行此命令后会要求输入用户名、密码，验证通过后即开始上传。
 
 	git push -u origin master
+
+7、拉取Git项目到本地
+	首先打开终端，cd到自己想要存放项目的文件夹
+
+	如：$ cd /Users/ioskaifa/Desktop
+
+	然后输入git clone url,url为你要拉取的项目地址
+
+	如：$ git clone https://github.com/...
